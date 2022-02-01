@@ -1,33 +1,32 @@
 class Admin::GenresController < ApplicationController
 
-　#beforeアクション追加予定
-  #今回はジャンルページの一覧に新規登録機能の追加を行う
-  def index
-    @genre = Genre.new(genre_params)
+ #beforeアクション追加予定
+ #今回はジャンルページの一覧に新規登録機能の追加を行う
+ def index
+    @genre = Genre.new
     @genres = Genre.all
-  end
+ end
 
-  def create
-    @genre = Genre.find(params[:id])
+ def create
+    @genre = Genre.new(genre_params)
     @genre.save
     #以下保存の有無を判定する条件式の追加
-  end
-  
-  def edit
+ end
+
+ def edit
     @genre = Genre.find(params[:id])
-  end
-  
-  def update
+ end
+
+ def update
     @genre = Genre.find(params[:id])
     @genre.update(genre_params)
     #条件式追加予定
-  end
-  
-  
-  private
+ end
 
-  def genre_params
+ private
+
+ def genre_params
     params.require(:genre).permit(:name, :created_at, :updated_at)
-  end
+ end
 
 end
